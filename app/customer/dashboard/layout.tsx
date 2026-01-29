@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import Navbar from "@/components/common/Navbar";
-import Footer from "@/components/common/Footer";
-import { Toaster } from "react-hot-toast";
+import Navbar from "./Navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,12 +25,25 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased m-0 p-0 overflow-x-hidden`}
+        className={`
+          ${geistSans.variable} ${geistMono.variable}
+          antialiased
+          bg-gray-50
+        `}
       >
-        {/* <Navbar /> */}
-        {children}
-        <Toaster position="top-right" />
-        {/* <Footer /> */}
+        {/* Fixed / Sticky Navbar safe */}
+        <Navbar />
+
+        {/* Page Wrapper */}
+        <main
+          className="
+            min-h-[calc(100vh-64px)]
+            pt-16
+            px-3 sm:px-6 lg:px-8
+          "
+        >
+          {children}
+        </main>
       </body>
     </html>
   );
