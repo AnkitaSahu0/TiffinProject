@@ -81,7 +81,7 @@ export default function MenuManagementPage() {
     <div className="min-h-screen bg-gray-50 p-4 sm:p-6">
       <div className="max-w-6xl mx-auto">
         {/* HEADER */}
-        <div className="mb-8">
+        <div className="mb-8 ml-6">
           <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900">
             🍽 Menu Management
           </h1>

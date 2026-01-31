@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import GoogleButton from "@/components/GoogleButton";
+import Navbar from "@/components/common/Navbar";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -59,6 +60,8 @@ export default function LoginPage() {
   };
 
   return (
+    <>
+    <Navbar />
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-orange-100 to-red-100 px-4">
       <div className="w-full max-w-lg bg-white p-10 rounded-2xl shadow-lg shadow-red-400">
         <h2 className="text-gray-900 text-3xl font-bold text-center mb-6">
@@ -76,8 +79,7 @@ export default function LoginPage() {
             placeholder="Email or Phone"
             value={form.identifier}
             onChange={handleChange}
-            className="text-gray-700 w-full border px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
-          />
+            className="text-gray-700 w-full border px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500" />
 
           <input
             type="password"
@@ -85,8 +87,7 @@ export default function LoginPage() {
             placeholder="Password"
             value={form.password}
             onChange={handleChange}
-            className="text-gray-700 w-full border px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
-          />
+            className="text-gray-700 w-full border px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500" />
 
           <button
             type="submit"
@@ -108,6 +109,6 @@ export default function LoginPage() {
           </Link>
         </p>
       </div>
-    </div>
+    </div></>
   );
 }

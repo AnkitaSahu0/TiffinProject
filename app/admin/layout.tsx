@@ -34,12 +34,12 @@ export default function AdminLayout({
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
 
       <div className="min-h-screen flex bg-gray-100 relative">
         {/* MOBILE MENU BUTTON */}
         <button
-          className="md:hidden fixed top-20 left-4 z-50 bg-gray-900 text-white p-2 rounded-md"
+          className="md:hidden fixed top-5 left-2 z-50 bg-white text-black p-1 ml-1 rounded-md"
           onClick={() => setOpen(true)}
         >
           <Menu size={22} />
@@ -57,7 +57,8 @@ export default function AdminLayout({
         <aside
           className={`
            w-64 bg-gray-900 text-white p-5
-    md:flex md:flex-col
+    md:flex md:flex-col fixed md:sticky md:top-0
+    z-50
     fixed md:static z-50
     h-full md:min-h-screen
     transition-transform duration-300

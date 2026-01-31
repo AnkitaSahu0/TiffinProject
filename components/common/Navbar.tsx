@@ -18,24 +18,24 @@ export const greatVibes = Great_Vibes({
 export default function Navbar() {
   const [open, setOpen] = useState(false);
 
-  const [user, setUser] = useState<null | {
-    role: string;
-    identifier: string;
-  }>(null);
+  // const [user, setUser] = useState<null | {
+  //   role: string;
+  //   identifier: string;
+  // }>(null);
 
-  useEffect(() => {
-    const auth = localStorage.getItem("auth");
-    if (auth) {
-      setUser(JSON.parse(auth));
-    }
-  }, []);
+  // useEffect(() => {
+  //   const auth = localStorage.getItem("auth");
+  //   if (auth) {
+  //     setUser(JSON.parse(auth));
+  //   }
+  // }, []);
 
   const navLinks = [
-    { name: "Home", href: "#home" },
-    { name: "About", href: "#about" },
-    { name: "Services", href: "#services" },
-    { name: "Plans", href: "#plans" },
-    { name: "Contact", href: "#contact" },
+    { name: "Home", href: "/#home" },
+    { name: "About", href: "/#about" },
+    { name: "Services", href: "/#services" },
+    { name: "Plans", href: "/#plans" },
+    { name: "Contact", href: "/#contact" },
   ];
 
   return (

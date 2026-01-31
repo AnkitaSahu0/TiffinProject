@@ -1,4 +1,4 @@
-import Navbar from "../Navbar";
+
 
 const weeklyMenu = [
   {
@@ -36,8 +36,7 @@ const weeklyMenu = [
 export default function MenuPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-100 via-white to-blue-50">
-      <Navbar />
-
+     
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         {/* Heading */}
         <div className="text-center mb-8 sm:mb-12">

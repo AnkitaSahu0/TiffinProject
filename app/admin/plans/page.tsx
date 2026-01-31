@@ -69,10 +69,10 @@ const PlanManagement: React.FC = () => {
     <div className="min-h-screen bg-gray-50 p-4 sm:p-6">
       <div className="max-w-6xl mx-auto">
         {/* HEADER */}
-        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1 ml-6">
           📦 Plan Management
         </h1>
-        <p className="text-gray-600 mb-8">
+        <p className="text-gray-600 mb-8 ml-6">
           Create, update and manage subscription plans
         </p>
 
