@@ -150,13 +150,13 @@
 
 
 "use client";
-import { apiRequest } from "@/lib/api";
+import { apiRequest } from "@/my-app/lib/api";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import toast from "react-hot-toast";
-import Navbar from "@/components/common/Navbar";
+import Navbar from "@/my-app/components/common/Navbar";
 
 export default function RegisterPage() {
   const router = useRouter();

@@ -144,10 +144,10 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import GoogleButton from "@/components/GoogleButton";
-import Navbar from "@/components/common/Navbar";
+import GoogleButton from "@/my-app/components/GoogleButton";
+import Navbar from "@/my-app/components/common/Navbar";
 import toast from "react-hot-toast";
-import { apiRequest } from "@/lib/api";
+import { apiRequest } from "@/my-app/lib/api";
 
 export default function LoginPage() {
   const router = useRouter();

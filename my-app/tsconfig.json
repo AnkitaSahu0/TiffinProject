@@ -35,8 +35,8 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts",
-    "lib/auth.js",
-    "lib/fetcher.js"
+    "my-app/lib/auth.js",
+    "my-app/lib/fetcher.js"
   ],
   "exclude": [
     "node_modules"
