@@ -3,7 +3,7 @@ import Hero from "@/components/landing/Hero";
 import Services from "@/components/landing/Services";
 import Plans from "@/components/landing/Plans";
 import Contact from "@/components/landing/Contact";
-import { h1 } from "framer-motion/client";
+
 import Navbar from "@/components/common/Navbar";
 import Footer from "@/components/common/Footer";
 

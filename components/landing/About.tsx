@@ -2,9 +2,9 @@ import Image from "next/image";
 
 export default function AboutPage() {
   return (
-    <section className="w-full bg-white overflow-hidden">
+    <section className="w-full bg-white overflow-hidden ">
       {/* HERO */}
-      <div className="mt-10 py-12 sm:py-16 px-4 sm:px-6 lg:px-20 text-center">
+      <div className="   sm:py-12 px-4 sm:px-6 lg:px-20 text-center">
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800">
           About <span className="text-orange-600">Annapurna Delight</span>
         </h1>

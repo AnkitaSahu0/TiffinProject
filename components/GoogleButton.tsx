@@ -1,6 +1,5 @@
 import { FcGoogle } from "react-icons/fc";
 
-/* eslint-disable @next/next/no-img-element */
 export default function GoogleButton() {
   return (
     <button

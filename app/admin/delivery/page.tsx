@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+
 "use client";
 
 import { useMemo, useState } from "react";
@@ -63,15 +66,17 @@ export default function DailyDeliveryPage() {
   /* ---------------- UI ---------------- */
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4 sm:p-6">
+    
+    <div className="min-h-screen bg-gray-50 dark:bg-slate-950 p-4 sm:p-6 transition-colors duration-300">
       <div className="max-w-7xl mx-auto">
+        
         {/* HEADER */}
         <div className="mb-8 ml-6">
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 flex items-center gap-2">
-            🚚 Daily Delivery List
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white flex items-center gap-2">
+            Daily Delivery List
           </h1>
-          <p className="text-gray-600 mt-1">
-            Delivery schedule for <b className="text-gray-900">{today}</b>
+          <p className="text-gray-600 dark:text-gray-400 mt-1">
+            Delivery schedule for <b className="text-gray-900 dark:text-orange-400">{today}</b>
           </p>
         </div>
 
@@ -92,7 +97,7 @@ export default function DailyDeliveryPage() {
                 ${
                   filter === type
                     ? "bg-orange-500 text-white"
-                    : "bg-white border hover:bg-orange-50"
+                    : "bg-white dark:bg-slate-800 border dark:border-slate-700 text-gray-700 dark:text-gray-300 hover:bg-orange-50 dark:hover:bg-slate-700"
                 }`}
             >
               {type}
@@ -101,61 +106,60 @@ export default function DailyDeliveryPage() {
         </div>
 
         {/* ================= DESKTOP TABLE ================= */}
-        <div className="hidden md:block bg-white rounded-2xl shadow-lg overflow-x-auto">
+        <div className="hidden md:block bg-white dark:bg-slate-800 rounded-2xl shadow-lg overflow-hidden border dark:border-slate-700 transition-colors">
           <table className="min-w-full text-sm">
-            <thead className="bg-orange-200 text-gray-900">
+            <thead className="bg-orange-200 dark:bg-orange-600 text-gray-900 dark:text-white">
               <tr>
                 <th className="px-5 py-4 text-left">Customer</th>
-                <th className="px-5 py-4">Address</th>
-                <th className="px-5 py-4">Meal</th>
-                <th className="px-5 py-4">Status</th>
+                <th className="px-5 py-4 text-left">Address</th>
+                <th className="px-5 py-4 text-center">Meal</th>
+                <th className="px-5 py-4 text-center">Status</th>
               </tr>
             </thead>
 
-            <tbody>
+            <tbody className="divide-y divide-gray-100 dark:divide-slate-700">
               {filteredDeliveries.map((item) => (
                 <tr
                   key={item.id}
-                  className={`border-t transition ${
-                    item.paused ? "bg-red-50" : "hover:bg-orange-50"
+                  className={`transition ${
+                    item.paused 
+                      ? "bg-red-50 dark:bg-red-900/10" 
+                      : "hover:bg-orange-50 dark:hover:bg-slate-700/50"
                   }`}
                 >
                   <td className="px-5 py-4">
-                    <p className="font-semibold text-gray-900">{item.name}</p>
-                    <p className="text-xs text-gray-500">📞 {item.phone}</p>
+                    <p className="font-semibold text-gray-900 dark:text-white">{item.name}</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">📞 {item.phone}</p>
                   </td>
 
-                  <td className="px-5 py-4 text-gray-700">{item.address}</td>
+                  <td className="px-5 py-4 text-gray-700 dark:text-gray-300">{item.address}</td>
 
-                  <td className="px-5 py-4">
-                    <span className="px-3 py-1 rounded-full text-xs font-semibold bg-gray-100 text-gray-700">
+                  <td className="px-5 py-4 text-center">
+                    <span className="px-3 py-1 rounded-full text-xs font-semibold bg-gray-100 dark:bg-slate-700 text-gray-700 dark:text-gray-300">
                       {item.mealType}
                     </span>
                   </td>
 
-                  <td className="px-5 py-4">
+                  <td className="px-5 py-4 text-center">
                     {item.paused ? (
-                      <span className="px-3 py-1 rounded-full text-xs font-bold bg-red-100 text-red-700">
+                      <span className="px-3 py-1 rounded-full text-xs font-bold bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400">
                         ⛔ Paused
                       </span>
                     ) : (
-                      <span className="px-3 py-1 rounded-full text-xs font-bold bg-green-100 text-green-700">
+                      <span className="px-3 py-1 rounded-full text-xs font-bold bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400">
                         ✔ Deliver
                       </span>
                     )}
                   </td>
                 </tr>
               ))}
-
-              {filteredDeliveries.length === 0 && (
-                <tr>
-                  <td colSpan={4} className="text-center py-10 text-gray-500">
-                    No deliveries found for selected filter
-                  </td>
-                </tr>
-              )}
             </tbody>
           </table>
+          {filteredDeliveries.length === 0 && (
+            <div className="text-center py-10 text-gray-500 dark:text-gray-400 bg-white dark:bg-slate-800">
+              No deliveries found for selected filter
+            </div>
+          )}
         </div>
 
         {/* ================= MOBILE CARDS ================= */}
@@ -163,48 +167,44 @@ export default function DailyDeliveryPage() {
           {filteredDeliveries.map((item) => (
             <div
               key={item.id}
-              className={`rounded-xl shadow p-5 bg-white ${
-                item.paused ? "border-l-4 border-red-500" : ""
+              className={`rounded-xl shadow p-5 transition-colors ${
+                item.paused 
+                  ? "bg-red-50 dark:bg-slate-800 border-l-4 border-red-500" 
+                  : "bg-white dark:bg-slate-800 dark:border dark:border-slate-700"
               }`}
             >
               <div className="flex justify-between items-start">
                 <div>
-                  <h3 className="font-bold text-lg text-gray-900">
+                  <h3 className="font-bold text-lg text-gray-900 dark:text-white">
                     {item.name}
                   </h3>
-                  <p className="text-sm text-gray-500">📞 {item.phone}</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">📞 {item.phone}</p>
                 </div>
 
-                <span className="px-3 py-1 rounded-full text-xs font-semibold bg-gray-100">
+                <span className="px-3 py-1 rounded-full text-xs font-semibold bg-gray-100 dark:bg-slate-700 text-gray-700 dark:text-gray-300">
                   {item.mealType}
                 </span>
               </div>
 
-              <p className="text-sm text-gray-700 mt-2">📍 {item.address}</p>
+              <p className="text-sm text-gray-700 dark:text-gray-300 mt-2">📍 {item.address}</p>
 
               <div className="mt-3">
                 {item.paused ? (
-                  <span className="px-3 py-1 rounded-full text-xs font-bold bg-red-100 text-red-700">
+                  <span className="px-3 py-1 rounded-full text-xs font-bold bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400">
                     ⛔ Paused
                   </span>
                 ) : (
-                  <span className="px-3 py-1 rounded-full text-xs font-bold bg-green-100 text-green-700">
+                  <span className="px-3 py-1 rounded-full text-xs font-bold bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400">
                     ✔ Deliver Today
                   </span>
                 )}
               </div>
             </div>
           ))}
-
-          {filteredDeliveries.length === 0 && (
-            <div className="bg-white rounded-xl shadow p-6 text-center text-gray-500">
-              No deliveries found for selected filter
-            </div>
-          )}
         </div>
 
         {/* WARNING */}
-        <div className="mt-6 bg-red-100 border-l-4 border-red-500 p-4 rounded-lg text-red-700 text-sm">
+        <div className="mt-6 bg-red-100 dark:bg-red-900/20 border-l-4 border-red-500 p-4 rounded-lg text-red-700 dark:text-red-400 text-sm">
           ⚠️ <b>Paused customers</b> must NOT receive delivery today.
         </div>
       </div>
@@ -227,12 +227,12 @@ function StatCard({
 }) {
   return (
     <div
-      className={`rounded-xl p-4 shadow-sm ${
+      className={`rounded-xl p-4 shadow-sm transition-all duration-300 ${
         success
-          ? "bg-green-500 text-white"
+          ? "bg-green-600 dark:bg-green-700 text-white"
           : danger
-            ? "bg-red-500 text-white"
-            : "bg-white"
+            ? "bg-red-600 dark:bg-red-700 text-white"
+            : "bg-white dark:bg-slate-800 text-gray-900 dark:text-white border dark:border-slate-700"
       }`}
     >
       <p className="text-xs opacity-80">{title}</p>

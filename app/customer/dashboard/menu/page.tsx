@@ -1,5 +1,6 @@
 
 
+
 const weeklyMenu = [
   {
     day: "Monday",
@@ -35,15 +36,22 @@ const weeklyMenu = [
 
 export default function MenuPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-100 via-white to-blue-50">
-     
+    <div
+      className="
+        min-h-screen
+        bg-gradient-to-br from-orange-100 via-white to-blue-50
+        dark:from-gray-900 dark:via-gray-950 dark:to-gray-900
+        transition-colors duration-300
+      "
+    >
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         {/* Heading */}
         <div className="text-center mb-8 sm:mb-12">
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900">
-            Weekly Menu 🍽️
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900 dark:text-gray-100 transition-colors">
+            Weekly Menu
           </h1>
-          <p className="text-xs sm:text-sm text-gray-500 mt-2">
+
+          <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mt-2 transition-colors">
             Fresh & healthy meals for the whole week
           </p>
         </div>
@@ -53,18 +61,27 @@ export default function MenuPage() {
           {weeklyMenu.map((item) => (
             <div
               key={item.day}
-              className="rounded-2xl p-4 sm:p-6 
-                         bg-gradient-to-b from-orange-200 to-red-50 
-                         shadow-md hover:shadow-xl 
-                         transition-all duration-300 
-                         hover:-translate-y-1"
+              className="
+                rounded-2xl p-4 sm:p-6
+                bg-gradient-to-b from-orange-200 to-red-50
+                dark:from-gray-700 dark:to-gray-900
+                shadow-md hover:shadow-xl
+                transition-all duration-300
+                hover:-translate-y-1
+              "
             >
               {/* Day */}
               <div className="text-center mb-4 sm:mb-6">
                 <span
-                  className="inline-block bg-white/30 px-4 py-1.5 sm:px-5 sm:py-2 
-                                 rounded-full text-xs sm:text-sm 
-                                 font-bold tracking-wide uppercase"
+                  className="
+                    inline-block
+                    bg-white/30 dark:bg-white/10
+                    px-4 py-1.5 sm:px-5 sm:py-2
+                    rounded-full
+                    text-xs sm:text-sm
+                    font-bold tracking-wide uppercase
+                    text-gray-900 dark:text-gray-100
+                  "
                 >
                   {item.day}
                 </span>
@@ -73,21 +90,21 @@ export default function MenuPage() {
               {/* Meals */}
               <div className="space-y-3 sm:space-y-4">
                 {/* Lunch */}
-                <div className="bg-white/40 p-3 sm:p-4 rounded-xl">
-                  <p className="text-xs sm:text-sm font-bold uppercase mb-1 text-orange-600">
+                <div className="bg-white/40 dark:bg-gray-700/40 p-3 sm:p-4 rounded-xl transition-colors">
+                  <p className="text-xs sm:text-sm font-bold uppercase mb-1 text-orange-600 dark:text-orange-400">
                     🍛 Lunch
                   </p>
-                  <p className="text-xs sm:text-sm font-medium text-gray-800">
+                  <p className="text-xs sm:text-sm font-medium text-gray-800 dark:text-gray-200">
                     {item.lunch}
                   </p>
                 </div>
 
                 {/* Dinner */}
-                <div className="bg-white/40 p-3 sm:p-4 rounded-xl">
-                  <p className="text-xs sm:text-sm font-bold uppercase mb-1 text-blue-600">
+                <div className="bg-white/40 dark:bg-gray-700/40 p-3 sm:p-4 rounded-xl transition-colors">
+                  <p className="text-xs sm:text-sm font-bold uppercase mb-1 text-blue-600 dark:text-blue-400">
                     🌙 Dinner
                   </p>
-                  <p className="text-xs sm:text-sm font-medium text-gray-800">
+                  <p className="text-xs sm:text-sm font-medium text-gray-800 dark:text-gray-200">
                     {item.dinner}
                   </p>
                 </div>

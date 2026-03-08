@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function SettingsPage() {
   const [form, setForm] = useState({
@@ -8,7 +8,52 @@ export default function SettingsPage() {
     email: "",
     address: "",
     phone: "",
+    password: "",
+    
   });
+
+  const [message, setMessage] = useState("");
+
+ // Auto fill user data
+  useEffect(() => {
+    const userString = localStorage.getItem("user");
+    if (userString) {
+      const storedUser = JSON.parse(userString);
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setForm({
+        name: storedUser.name || "",
+        email: storedUser.email || "",
+        address: storedUser.address || "",
+        phone: storedUser.phone || "",
+        password: "",
+      });
+    }
+  }, []);
+
+  const handleSubmit = async () => {
+    const token = localStorage.getItem("token");
+
+    const res = await fetch("http://localhost:5000/api/users/update", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(form),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      setMessage(data.error);
+    } else {
+      setMessage(data.message);
+
+      // Update localStorage user
+      localStorage.setItem("user", JSON.stringify(data.user));
+    }
+  };
+
 
   return (
     <div className="min-h-screen bg-gray-50 px-4 py-10">
@@ -78,10 +123,28 @@ export default function SettingsPage() {
               placeholder="Enter phone number"
             />
           </div>
+
+          {/* password */}
+          <div>
+            <label className="text-sm font-semibold text-gray-700">
+             Password
+            </label>
+            <input
+              type="tel"
+              className="w-full mt-1 rounded-lg border border-gray-300 p-2.5 text-sm focus:ring-2 focus:ring-orange-400 outline-none"
+              value={form.password}
+              onChange={(e) => setForm({ ...form, password: e.target.value })}
+              placeholder="Enter phone number"
+            />
+          </div>
         </div>
+        
+          {message && (
+          <p className="mt-4 text-green-600 font-medium">{message}</p>
+        )}
 
         {/* BUTTON */}
-        <button className="w-full mt-6 bg-orange-600 text-white py-2.5 rounded-xl font-semibold hover:bg-orange-700 transition">
+        <button  onClick={handleSubmit} className="w-full mt-6 bg-orange-600 text-white py-2.5 rounded-xl font-semibold hover:bg-orange-700 transition">
           Save Changes
         </button>
       </div>

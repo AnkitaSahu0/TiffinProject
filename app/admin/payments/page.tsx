@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+
 "use client";
 
 import { useMemo, useState } from "react";
@@ -88,25 +91,28 @@ export default function PaymentManagementPage() {
   const statusStyle = (status: PaymentStatus) => {
     switch (status) {
       case "SUCCESS":
-        return "bg-green-100 text-green-700";
+        // Dark mode friendly green
+        return "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 border border-green-200 dark:border-green-800";
       case "PENDING":
-        return "bg-orange-100 text-orange-700";
+        // Dark mode friendly orange
+        return "bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400 border border-orange-200 dark:border-orange-800";
       case "FAILED":
-        return "bg-red-100 text-red-700";
+        // Dark mode friendly red
+        return "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400 border border-red-200 dark:border-red-800";
     }
   };
 
   /* ---------------- UI ---------------- */
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4 sm:p-6">
+    <div className="min-h-screen bg-gray-50 dark:bg-slate-950 p-4 sm:p-6 transition-colors duration-300">
       <div className="max-w-7xl mx-auto">
         {/* HEADER */}
         <div className="mb-8 ml-6">
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900">
-            💳 Payment Management
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white transition-colors">
+            Payment Management
           </h1>
-          <p className="text-gray-600 mt-1">
+          <p className="text-gray-600 dark:text-gray-400 mt-1">
             Search, verify, and monitor all customer payments
           </p>
         </div>
@@ -131,7 +137,7 @@ export default function PaymentManagementPage() {
             placeholder="Search by name, phone or transaction ID..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full md:w-1/2 px-4 py-2 rounded-lg border focus:ring-2 focus:ring-orange-400 outline-none"
+            className="w-full md:w-1/2 px-4 py-2 rounded-lg border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-400 outline-none transition-all"
           />
 
           <div className="flex flex-wrap gap-2">
@@ -142,8 +148,8 @@ export default function PaymentManagementPage() {
                 className={`px-4 py-1.5 rounded-full text-xs font-semibold transition
                   ${
                     filter === s
-                      ? "bg-orange-500 text-white"
-                      : "bg-white border hover:bg-orange-50"
+                      ? "bg-orange-500 text-white shadow-lg shadow-orange-500/30"
+                      : "bg-white dark:bg-slate-800 border dark:border-slate-700 text-gray-700 dark:text-gray-300 hover:bg-orange-50 dark:hover:bg-slate-700"
                   }`}
               >
                 {s}
@@ -153,75 +159,73 @@ export default function PaymentManagementPage() {
         </div>
 
         {/* ================= DESKTOP TABLE ================= */}
-        <div className="hidden md:block bg-white rounded-2xl shadow-lg overflow-x-auto">
+        <div className="hidden md:block bg-white dark:bg-slate-800 rounded-2xl shadow-lg overflow-hidden border dark:border-slate-700 transition-colors">
           <table className="min-w-full text-sm">
-            <thead className="bg-orange-100">
+            <thead className="bg-orange-100 dark:bg-orange-600/20 text-gray-900 dark:text-orange-400">
               <tr>
                 <th className="px-5 py-4 text-left">Customer</th>
-                <th className="px-5 py-4">Plan</th>
-                <th className="px-5 py-4">Amount</th>
-                <th className="px-5 py-4">Date</th>
-                <th className="px-5 py-4">Transaction</th>
-                <th className="px-5 py-4">Status</th>
-                <th className="px-5 py-4">Action</th>
+                <th className="px-5 py-4 text-left">Plan</th>
+                <th className="px-5 py-4 text-left">Amount</th>
+                <th className="px-5 py-4 text-left">Date</th>
+                <th className="px-5 py-4 text-left">Transaction</th>
+                <th className="px-5 py-4 text-center">Status</th>
+                <th className="px-5 py-4 text-center">Action</th>
               </tr>
             </thead>
 
-            <tbody>
+            <tbody className="divide-y divide-gray-100 dark:divide-slate-700">
               {filteredPayments.map((p) => (
                 <tr
                   key={p.id}
-                  className="border-t hover:bg-orange-50 transition"
+                  className="transition-colors hover:bg-orange-50 dark:hover:bg-slate-700/50"
                 >
-                  <td className="px-5 py-4 font-semibold">
+                  <td className="px-5 py-4 font-semibold text-gray-900 dark:text-white">
                     {p.customerName}
-                    <div className="text-xs text-gray-500">{p.phone}</div>
+                    <div className="text-xs text-gray-500 dark:text-gray-400 font-normal">{p.phone}</div>
                   </td>
-                  <td className="px-5 py-4">{p.planName}</td>
-                  <td className="px-5 py-4 font-bold">₹{p.amount}</td>
-                  <td className="px-5 py-4">{p.paymentDate}</td>
-                  <td className="px-5 py-4 text-xs font-mono text-gray-500">
+                  <td className="px-5 py-4 text-gray-700 dark:text-gray-300">{p.planName}</td>
+                  <td className="px-5 py-4 font-bold text-gray-900 dark:text-white">₹{p.amount}</td>
+                  <td className="px-5 py-4 text-gray-600 dark:text-gray-400">{p.paymentDate}</td>
+                  <td className="px-5 py-4 text-xs font-mono text-gray-500 dark:text-gray-400">
                     {p.transactionId}
                   </td>
-                  <td className="px-5 py-4">
+                  <td className="px-5 py-4 text-center">
                     <span
-                      className={`px-3 py-1 rounded-full text-xs font-bold ${statusStyle(p.status)}`}
+                      className={`px-3 py-1 rounded-full text-[10px] font-bold ${statusStyle(p.status)}`}
                     >
                       {p.status}
                     </span>
                   </td>
-                  <td className="px-5 py-4">
+                  <td className="px-5 py-4 text-center">
                     {p.status === "PENDING" && (
                       <button
                         onClick={() => verifyPayment(p.id)}
-                        className="px-4 py-1.5 text-xs rounded-lg bg-orange-500 text-white hover:bg-orange-600 transition"
+                        className="px-4 py-1.5 text-xs rounded-lg bg-orange-500 text-white font-bold hover:bg-orange-600 transition active:scale-95 shadow-md shadow-orange-500/20"
                       >
                         Verify
                       </button>
                     )}
                     {p.status === "SUCCESS" && (
-                      <span className="text-green-600 text-xs font-semibold">
+                      <span className="text-green-600 dark:text-green-400 text-xs font-bold flex items-center justify-center gap-1">
                         Verified ✓
                       </span>
                     )}
                     {p.status === "FAILED" && (
-                      <span className="text-red-600 text-xs font-semibold">
+                      <span className="text-red-600 dark:text-red-400 text-xs font-bold flex items-center justify-center gap-1">
                         Retry Needed
                       </span>
                     )}
                   </td>
                 </tr>
               ))}
-
-              {filteredPayments.length === 0 && (
-                <tr>
-                  <td colSpan={7} className="text-center py-10 text-gray-500">
-                    No matching payments found
-                  </td>
-                </tr>
-              )}
             </tbody>
           </table>
+          
+          {filteredPayments.length === 0 && (
+            <div className="text-center py-10 text-gray-500 dark:text-gray-400 bg-white dark:bg-slate-800 transition-colors">
+              No matching payments found
+            </div>
+          )}
         </div>
 
         {/* ================= MOBILE CARDS ================= */}
@@ -229,31 +233,31 @@ export default function PaymentManagementPage() {
           {filteredPayments.map((p) => (
             <div
               key={p.id}
-              className="bg-white rounded-xl shadow p-5 space-y-3"
+              className="bg-white dark:bg-slate-800 rounded-xl shadow-md p-5 space-y-3 border dark:border-slate-700 transition-colors"
             >
               <div className="flex justify-between items-start">
                 <div>
-                  <h3 className="font-bold text-lg">{p.customerName}</h3>
-                  <p className="text-sm text-gray-500">{p.phone}</p>
+                  <h3 className="font-bold text-lg text-gray-900 dark:text-white">{p.customerName}</h3>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">{p.phone}</p>
                 </div>
                 <span
-                  className={`px-3 py-1 rounded-full text-xs font-bold ${statusStyle(p.status)}`}
+                  className={`px-3 py-1 rounded-full text-[10px] font-bold ${statusStyle(p.status)}`}
                 >
                   {p.status}
                 </span>
               </div>
 
-              <div className="text-sm text-gray-700 space-y-1">
-                <p>📦 {p.planName}</p>
-                <p>💰 ₹{p.amount}</p>
-                <p>📅 {p.paymentDate}</p>
-                <p className="font-mono text-xs">🔁 {p.transactionId}</p>
+              <div className="text-sm text-gray-700 dark:text-gray-300 space-y-2 bg-gray-50 dark:bg-slate-900/50 p-3 rounded-lg">
+                <p className="flex justify-between"><span>📦 Plan:</span> <span className="font-medium">{p.planName}</span></p>
+                <p className="flex justify-between"><span>💰 Amount:</span> <span className="font-bold text-orange-600 dark:text-orange-400">₹{p.amount}</span></p>
+                <p className="flex justify-between"><span>📅 Date:</span> <span>{p.paymentDate}</span></p>
+                <p className="font-mono text-[10px] text-gray-400 mt-2 border-t dark:border-slate-700 pt-2 break-all">ID: {p.transactionId}</p>
               </div>
 
               {p.status === "PENDING" && (
                 <button
                   onClick={() => verifyPayment(p.id)}
-                  className="w-full mt-2 px-4 py-2 rounded-lg bg-orange-500 text-white text-sm font-semibold hover:bg-orange-600 transition"
+                  className="w-full mt-2 px-4 py-2 rounded-lg bg-orange-500 text-white text-sm font-bold hover:bg-orange-600 transition shadow-lg shadow-orange-500/20"
                 >
                   Verify Payment
                 </button>
@@ -262,7 +266,7 @@ export default function PaymentManagementPage() {
           ))}
 
           {filteredPayments.length === 0 && (
-            <div className="bg-white rounded-xl shadow p-6 text-center text-gray-500">
+            <div className="bg-white dark:bg-slate-800 rounded-xl shadow p-6 text-center text-gray-500 dark:text-gray-400 border dark:border-slate-700">
               No matching payments found
             </div>
           )}
@@ -285,12 +289,14 @@ function StatCard({
 }) {
   return (
     <div
-      className={`rounded-xl p-4 shadow-sm ${
-        highlight ? "bg-orange-500 text-white" : "bg-white"
+      className={`rounded-xl p-4 shadow-sm border transition-all duration-300 ${
+        highlight 
+          ? "bg-orange-500 border-orange-400 text-white shadow-lg shadow-orange-500/20" 
+          : "bg-white dark:bg-slate-800 border-transparent dark:border-slate-700 text-gray-900 dark:text-white"
       }`}
     >
-      <p className="text-xs opacity-80">{title}</p>
-      <h3 className="text-2xl font-extrabold mt-1">{value}</h3>
+      <p className="text-[10px] uppercase tracking-wider font-bold opacity-80">{title}</p>
+      <h3 className="text-2xl font-black mt-1">{value}</h3>
     </div>
   );
 }

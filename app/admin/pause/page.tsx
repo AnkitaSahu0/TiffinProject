@@ -1,3 +1,5 @@
+
+
 "use client";
 
 import React, { useState } from "react";
@@ -50,38 +52,40 @@ export default function PauseManagementPage() {
   /* ---------------- UI ---------------- */
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4 sm:p-6">
+    
+    <div className="min-h-screen bg-gray-50 dark:bg-slate-950 p-4 sm:p-6 transition-colors duration-300">
       <div className="max-w-7xl mx-auto">
+        
         {/* HEADER */}
         <div className="mb-8 ml-6">
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900">
-            ⏸ Pause Management
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white transition-colors">
+            Pause Management
           </h1>
-          <p className="text-gray-600 mt-1">
+          <p className="text-gray-600 dark:text-gray-400 mt-1">
             Track customers with paused deliveries in real time
           </p>
         </div>
 
         {/* ================= DESKTOP TABLE ================= */}
-        <div className="hidden md:block bg-white rounded-2xl shadow-lg overflow-x-auto">
+        <div className="hidden md:block bg-white dark:bg-slate-800 rounded-2xl shadow-lg overflow-hidden border dark:border-slate-700 transition-colors">
           <table className="min-w-full text-sm">
-            <thead className="bg-orange-100 text-gray-900">
+            <thead className="bg-orange-100 dark:bg-orange-600/20 text-gray-900 dark:text-orange-400">
               <tr>
                 <th className="px-4 py-4 text-left">Customer</th>
-                <th className="px-4 py-4">Phone</th>
-                <th className="px-4 py-4">Plan</th>
-                <th className="px-4 py-4">From</th>
-                <th className="px-4 py-4">To</th>
-                <th className="px-4 py-4">Status</th>
-                <th className="px-4 py-4">Reason</th>
-                <th className="px-4 py-4">Action</th>
+                <th className="px-4 py-4 text-left">Phone</th>
+                <th className="px-4 py-4 text-left">Plan</th>
+                <th className="px-4 py-4 text-left">From</th>
+                <th className="px-4 py-4 text-left">To</th>
+                <th className="px-4 py-4 text-center">Status</th>
+                <th className="px-4 py-4 text-left">Reason</th>
+                <th className="px-4 py-4 text-center">Action</th>
               </tr>
             </thead>
 
-            <tbody>
+            <tbody className="divide-y divide-gray-100 dark:divide-slate-700">
               {pausedCustomers.length === 0 && (
                 <tr>
-                  <td colSpan={8} className="text-center py-10 text-gray-500">
+                  <td colSpan={8} className="text-center py-10 text-gray-500 dark:text-gray-400">
                     🎉 No paused customers
                   </td>
                 </tr>
@@ -97,34 +101,35 @@ export default function PauseManagementPage() {
                   <tr
                     key={entry.id}
                     className={`
-                      border-t transition
-                      hover:shadow-md hover:-translate-y-[1px]
-                      ${pausedToday ? "bg-red-50" : "hover:bg-orange-50"}
+                      transition-all duration-200
+                      ${pausedToday 
+                        ? "bg-red-50/50 dark:bg-red-900/10" 
+                        : "hover:bg-orange-50 dark:hover:bg-slate-700/50"}
                     `}
                   >
-                    <td className="px-4 py-4 font-semibold">
+                    <td className="px-4 py-4 font-semibold text-gray-900 dark:text-white">
                       {entry.customerName}
                     </td>
-                    <td className="px-4 py-4">{entry.phone}</td>
-                    <td className="px-4 py-4">{entry.planName}</td>
-                    <td className="px-4 py-4">{entry.pauseFrom}</td>
-                    <td className="px-4 py-4">{entry.pauseTo}</td>
-                    <td className="px-4 py-4">
+                    <td className="px-4 py-4 text-gray-600 dark:text-gray-300">{entry.phone}</td>
+                    <td className="px-4 py-4 text-gray-600 dark:text-gray-300">{entry.planName}</td>
+                    <td className="px-4 py-4 text-gray-600 dark:text-gray-300">{entry.pauseFrom}</td>
+                    <td className="px-4 py-4 text-gray-600 dark:text-gray-300">{entry.pauseTo}</td>
+                    <td className="px-4 py-4 text-center">
                       {pausedToday ? (
-                        <span className="px-3 py-1 rounded-full text-xs font-bold bg-red-100 text-red-700 animate-pulse">
+                        <span className="px-3 py-1 rounded-full text-[10px] font-bold bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 animate-pulse border border-red-200 dark:border-red-800">
                           Paused Today
                         </span>
                       ) : (
-                        <span className="px-3 py-1 rounded-full text-xs font-bold bg-green-100 text-green-700">
+                        <span className="px-3 py-1 rounded-full text-[10px] font-bold bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 border border-green-200 dark:border-green-800">
                           Scheduled
                         </span>
                       )}
                     </td>
-                    <td className="px-4 py-4 italic">{entry.reason || "—"}</td>
-                    <td className="px-4 py-4">
+                    <td className="px-4 py-4 italic text-gray-500 dark:text-gray-400">{entry.reason || "—"}</td>
+                    <td className="px-4 py-4 text-center">
                       <button
                         onClick={() => resumeDelivery(entry.id)}
-                        className="px-4 py-1.5 rounded-lg bg-orange-500 text-white text-xs font-semibold hover:bg-orange-600 transition"
+                        className="px-4 py-1.5 rounded-lg bg-orange-500 text-white text-xs font-semibold hover:bg-orange-600 transition shadow-md shadow-orange-500/20 active:scale-95"
                       >
                         Resume
                       </button>
@@ -139,7 +144,7 @@ export default function PauseManagementPage() {
         {/* ================= MOBILE CARDS ================= */}
         <div className="md:hidden space-y-4">
           {pausedCustomers.length === 0 && (
-            <div className="bg-white p-6 rounded-xl shadow text-center text-gray-500">
+            <div className="bg-white dark:bg-slate-800 p-6 rounded-xl shadow text-center text-gray-500 dark:text-gray-400 border dark:border-slate-700">
               🎉 No paused customers
             </div>
           )}
@@ -150,37 +155,37 @@ export default function PauseManagementPage() {
             return (
               <div
                 key={entry.id}
-                className={`bg-white rounded-xl shadow p-5 space-y-3 ${
-                  pausedToday ? "border-l-4 border-red-500" : ""
+                className={`bg-white dark:bg-slate-800 rounded-xl shadow p-5 space-y-3 border dark:border-slate-700 transition-colors ${
+                  pausedToday ? "border-l-4 border-l-red-500" : ""
                 }`}
               >
                 <div className="flex justify-between items-start">
-                  <h3 className="font-bold text-lg text-gray-900">
+                  <h3 className="font-bold text-lg text-gray-900 dark:text-white">
                     {entry.customerName}
                   </h3>
                   <span
-                    className={`text-xs font-bold px-3 py-1 rounded-full ${
+                    className={`text-[10px] font-bold px-3 py-1 rounded-full border ${
                       pausedToday
-                        ? "bg-red-100 text-red-700"
-                        : "bg-green-100 text-green-700"
+                        ? "bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 border-red-200 dark:border-red-800"
+                        : "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 border-green-200 dark:border-green-800"
                     }`}
                   >
                     {pausedToday ? "Paused Today" : "Scheduled"}
                   </span>
                 </div>
 
-                <div className="text-sm text-gray-700 space-y-1">
-                  <p>📞 {entry.phone}</p>
-                  <p>📦 {entry.planName}</p>
-                  <p>
-                    📅 {entry.pauseFrom} → {entry.pauseTo}
+                <div className="text-sm text-gray-700 dark:text-gray-300 space-y-2">
+                  <p className="flex items-center gap-2">📞 {entry.phone}</p>
+                  <p className="flex items-center gap-2">📦 {entry.planName}</p>
+                  <p className="flex items-center gap-2">
+                    📅 <span className="font-mono">{entry.pauseFrom}</span> → <span className="font-mono">{entry.pauseTo}</span>
                   </p>
-                  <p className="italic">📝 {entry.reason || "—"}</p>
+                  <p className="italic text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-slate-900/50 p-2 rounded">📝 {entry.reason || "No reason provided"}</p>
                 </div>
 
                 <button
                   onClick={() => resumeDelivery(entry.id)}
-                  className="w-full mt-2 px-4 py-2 rounded-lg bg-orange-500 text-white text-sm font-semibold hover:bg-orange-600 transition"
+                  className="w-full mt-2 px-4 py-2 rounded-lg bg-orange-500 text-white text-sm font-semibold hover:bg-orange-600 transition shadow-lg shadow-orange-500/20 active:scale-95"
                 >
                   Resume Delivery
                 </button>
@@ -190,11 +195,11 @@ export default function PauseManagementPage() {
         </div>
 
         {/* WARNING */}
-        <div className="mt-6 flex items-start gap-3 bg-red-100 border-l-4 border-red-600 p-4 rounded-lg text-red-800">
+        <div className="mt-6 flex items-start gap-3 bg-red-100 dark:bg-red-900/20 border-l-4 border-red-600 p-4 rounded-lg text-red-800 dark:text-red-400 transition-colors">
           <span className="text-xl">⚠️</span>
           <p className="text-sm">
             Customers marked <b>Paused Today</b> must <b>NOT</b> receive
-            delivery.
+            delivery today.
           </p>
         </div>
       </div>

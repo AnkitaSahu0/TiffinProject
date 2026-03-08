@@ -23,12 +23,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+     <html lang="en" suppressHydrationWarning>
       <body
         className={`
           ${geistSans.variable} ${geistMono.variable}
-          antialiased
-          bg-gray-50
+          
         `}
       >
         {/* Fixed / Sticky Navbar safe */}
@@ -38,8 +37,8 @@ export default function RootLayout({
         <main
           className="
             min-h-[calc(100vh-64px)]
-            pt-16
-            px-3 sm:px-6 lg:px-8
+            pt-6
+            px-3 sm:px-6 lg:px-8 dark:bg-gray-900
           "
         >
           {children}
@@ -48,3 +47,8 @@ export default function RootLayout({
     </html>
   );
 }
+
+// antialiased min-h-screen
+          //  bg-gray-50
+          //  bg-white text-black dark:bg-gray-950 dark:text-white transition-colors duration-300
+

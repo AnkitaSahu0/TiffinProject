@@ -1,11 +1,19 @@
+
+
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 export default function Order() {
   return (
-    <div className="space-y-8 px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
+    <div
+      className="
+        space-y-8 px-4 sm:px-6 lg:px-8 py-6 sm:py-10
+        transition-colors duration-300 dark:bg-black
+      "
+    >
       {/* Heading */}
-      <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800">
+      <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800 dark:text-gray-100 transition-colors">
         Welcome Back 👋
       </h1>
 
@@ -31,14 +39,23 @@ export default function Order() {
 /* ================= Card ================= */
 const Card = ({ title, value }: any) => (
   <div
-    className="bg-white rounded-xl shadow-sm
-               p-4 sm:p-5
-               hover:shadow-md transition
-               min-h-[90px]
-               flex flex-col justify-center"
+    className="
+      bg-white dark:bg-gray-800
+      rounded-xl shadow-sm
+      p-4 sm:p-5
+      hover:shadow-md transition
+      min-h-[90px]
+      flex flex-col justify-center
+      transition-colors duration-300
+    "
   >
-    <p className="text-gray-500 text-xs sm:text-sm">{title}</p>
-    <h3 className="text-lg sm:text-xl font-bold mt-1 text-gray-800">{value}</h3>
+    <p className="text-gray-500 dark:text-gray-400 text-xs sm:text-sm transition-colors">
+      {title}
+    </p>
+
+    <h3 className="text-lg sm:text-xl font-bold mt-1 text-gray-800 dark:text-gray-100 transition-colors">
+      {value}
+    </h3>
   </div>
 );
 
@@ -46,11 +63,14 @@ const Card = ({ title, value }: any) => (
 const Action = ({ label, link }: any) => (
   <a
     href={link}
-    className="bg-orange-500 text-white
-               py-2.5 sm:py-3
-               rounded-lg text-center
-               text-xs sm:text-sm font-bold
-               hover:bg-orange-600 transition"
+    className="
+      bg-orange-500 hover:bg-orange-600
+      text-white
+      py-2.5 sm:py-3
+      rounded-lg text-center
+      text-xs sm:text-sm font-bold
+      transition
+    "
   >
     {label}
   </a>
