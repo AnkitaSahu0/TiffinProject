@@ -1,11 +1,11 @@
-import AboutPage from "@/my-app/components/landing/About";
-import Hero from "@/my-app/components/landing/Hero";
-import Services from "@/my-app/components/landing/Services";
-import Plans from "@/my-app/components/landing/Plans";
-import Contact from "@/my-app/components/landing/Contact";
+import AboutPage from "@/components/landing/About";
+import Hero from "@/components/landing/Hero";
+import Services from "@/components/landing/Services";
+import Plans from "@/components/landing/Plans";
+import Contact from "@/components/landing/Contact";
 
-import Navbar from "@/my-app/components/common/Navbar";
-import Footer from "@/my-app/components/common/Footer";
+import Navbar from "@/components/common/Navbar";
+import Footer from "@/components/common/Footer";
 
 
 const Page = () => {
