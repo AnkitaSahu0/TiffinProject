@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:5000/api";
+const BASE_URL = "https://tiffin-backend.onrender.com";
 
 export async function apiRequest(
   endpoint: string,

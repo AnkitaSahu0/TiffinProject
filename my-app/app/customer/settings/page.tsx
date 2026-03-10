@@ -33,7 +33,7 @@ export default function SettingsPage() {
   const handleSubmit = async () => {
     const token = localStorage.getItem("token");
 
-    const res = await fetch("http://localhost:5000/api/users/update", {
+    const res = await fetch("https://tiffin-backend.onrender.com/api/users/update", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

@@ -178,7 +178,7 @@ export default function LoginPage() {
     setLoading(true);
 
     //  CALL REAL BACKEND LOGIN API
-    const data = await apiRequest("/auth/login", "POST", {
+    const data = await apiRequest("https://tiffin-backend.onrender.com/api/auth/login", "POST", {
       name:form.name,
       email: form.identifier,   // assuming backend uses email
       password: form.password,
