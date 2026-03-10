@@ -1,4 +1,4 @@
-export const BASE_URL = "https://tiffin-backend.onrender.com";
+export const BASE_URL = "https://tiffinproject-server.onrender.com";
 
 export async function apiRequest(
   endpoint: string,
