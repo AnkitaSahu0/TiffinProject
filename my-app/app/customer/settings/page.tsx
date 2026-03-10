@@ -34,7 +34,7 @@ export default function SettingsPage() {
   const handleSubmit = async () => {
     const token = localStorage.getItem("token");
 
-    const res = await fetch(`${BASE_URL}/api/users/update`, {
+    const res = await fetch("/api/users/update", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
