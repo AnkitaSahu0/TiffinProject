@@ -147,7 +147,7 @@ import Link from "next/link";
 import GoogleButton from "@/components/GoogleButton";
 import Navbar from "@/components/common/Navbar";
 import toast from "react-hot-toast";
-import { apiRequest } from "@/lib/api";
+import { apiRequest, BASE_URL } from "@/lib/api";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -178,7 +178,7 @@ export default function LoginPage() {
     setLoading(true);
 
     //  CALL REAL BACKEND LOGIN API
-    const data = await apiRequest("https://tiffin-backend.onrender.com/api/auth/login", "POST", {
+    const data = await apiRequest(`${BASE_URL}/api/auth/login`, "POST", {
       name:form.name,
       email: form.identifier,   // assuming backend uses email
       password: form.password,

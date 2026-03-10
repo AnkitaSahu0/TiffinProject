@@ -150,7 +150,7 @@
 
 
 "use client";
-import { apiRequest } from "@/lib/api";
+import { apiRequest, BASE_URL } from "@/lib/api";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -189,7 +189,7 @@ export default function RegisterPage() {
     setLoading(true);
 
     //  CALL REAL BACKEND API
-    const data = await apiRequest("https://tiffin-backend.onrender.com/api/auth/register", "POST", {
+    const data = await apiRequest(`${BASE_URL}/api/auth/register`, "POST", {
       name: form.name,
       email: form.email,
       password: form.password,
