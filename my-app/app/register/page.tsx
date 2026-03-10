@@ -150,13 +150,13 @@
 
 
 "use client";
-import { apiRequest } from "@/my-app/lib/api";
+import { apiRequest } from "@/lib/api";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import toast from "react-hot-toast";
-import Navbar from "@/my-app/components/common/Navbar";
+import Navbar from "@/components/common/Navbar";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -230,7 +230,7 @@ export default function RegisterPage() {
   return (
     <>
     <Navbar />
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-orange-100 to-red-100 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-linear-to-b from-orange-100 to-red-100 px-4">
       <div className="w-full max-w-lg bg-white p-10 rounded-2xl shadow-lg shadow-red-400">
         <h2 className="text-2xl sm:text-3xl font-bold text-center mb-6 text-gray-900">
           Create Account ✨

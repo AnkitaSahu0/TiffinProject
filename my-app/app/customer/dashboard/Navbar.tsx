@@ -4,16 +4,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
+
 import { usePathname, useRouter } from "next/navigation";
-import { Sun, Moon, Menu, X } from "lucide-react";
-import { cinzel, greatVibes } from "@/my-app/components/common/Navbar";
+import { Sun, Moon, Menu, X, Link } from "lucide-react";
+import { cinzel, greatVibes } from "@/components/common/Navbar";
 
 type UserType = {
   name: string;
   email: string;
 };
-
+     
 export default function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
